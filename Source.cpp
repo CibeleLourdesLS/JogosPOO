@@ -1,62 +1,68 @@
-// Tema 2 - Teste de Força.
-#include <iostream>
+// Tema 3 - Jogo de Corrida.
 #include <string>
 #include <ctime>
+#include <iostream>
 using namespace std;
 
-int main(int argc, char* args[])
+// Identificador da função 'imprimir_espaços'.
+void imprimir_espacos(int total);
+
+int main()
 {
-	bool sair = false;
-	string jog1, jog2;
-	int vida1 = 20, vida2 = 20;
-
-	// Lê o nome dos jogadores.
-	cout << "Digite o nome do jogador 1:" << endl;
-	cin >> jog1;
-	cout << "Digite o nome do jogador 2:" << endl;
-	cin >> jog2;
-
-	while (sair == false)
+	// Quantidade Total de Espaços.
+	int total_espacos = 10;
+	int rodada = 0;
+	
+	/*	//Laço para as rodadas do jogo.
+	*	A cada rodada o carro do jogador anda 1 (um) espaço.
+	*
+	*	Rodada		Carro
+	*	0			 s
+	*   1			  s
+	*   2			   s
+	*   3			    s
+	*	...			...
+	*   9			          s
+	*/
+	while (rodada < total_espacos)
 	{
-		// Mostra os personagens em tela.
-		cout << " o                   o" << endl;
-		cout << ".T./               \\.T." << endl;
-		cout << " ^                   ^" << endl;
-		// Mostra o nome dos jogadores.
-		cout << jog1 << "               " << jog2 << endl;
-		// Mostra a vida dos personagens.
-		cout << "Vida: " << vida1 << "          " << "Vida: " << vida2 << endl;
+		// Mostra em tela o Letreiro do Jogo.
+		 cout << "Jogo de Corrida" << endl;
+		// Mostra em tela o cartaz de fim de pista. 
+		imprimir_espacos(total_espacos);
+		cout << "|CHEGADA|" << endl;
 
-		// Espera o usuário apertar ENTER para iniciar a próxima rodada da luta.
-		system("pause");
+		// Jogador 1: 
+		//	a) Coloca uma quantidade de espaços dependendo da rodada.
+		//  b) Mostra o carro.
+		imprimir_espacos(rodada);
+		cout << "  _  " << endl;
+		imprimir_espacos(rodada);
+		cout << "-o-o>" << endl;
 
-		int dado6;
+		// Limpa a tela para mostrar a próxima rodada.
+		system("cls");
 
-		// Usa o tempo atual como "semente" do gerador
-		srand((int)time(0));
-		// Gera um número aleatório entre 1 e 100
-		dado6 = rand() % 6 + 1;
-		// Causa dano igual o valor gerado no "dado"
-		vida1 = vida1 - dado6;
-
-		// Mesma coisa para o Jogador 2
-		dado6 = rand() % 6 + 1;
-		vida2 = vida2 - dado6;
-
-		// Se sair não limpa a tela
-		if (vida1 <= 0 || vida2 <= 0)
-		{
-			sair = true;
-		}
-		// Se continuar então limpa a tela
-		else system("cls");
+		// Passa para a próxima rodada do laço.
+		rodada++;
 	}
-
-	// Verifica quem venceu o jogo.
-	if (vida1 > 0) cout << jog1 << " Venceu!" << endl;
-	else if (vida2 > 0) cout << jog2 << " Venceu!" << endl;
-	// Se a vida dos dois chegar a menos de 0 (zero) quer dizer que os dois perderam.
-	else cout << "Os dois perderam!" << endl;
 
 	return 0;
 }
+
+	//A função serve pra mostrar espaços em branco na tela.
+
+int total; //Quantidade de espaços que serão mostrados.
+
+
+void imprimir_espacos(int total)
+{
+	// Imprime espaços de 'qntd_atual' até 'total'.
+	for (int qntd_atual = 0; qntd_atual < total; qntd_atual++)
+	{
+		cout << " ";
+	}
+}
+
+
+	
